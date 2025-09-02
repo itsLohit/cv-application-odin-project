@@ -5,11 +5,14 @@ import { PracticalExperience } from "../sections/practicalExperience";
 import { Skills } from "../sections/skills";
 import { Projects } from "../sections/projects";
 
-export default function EditCV(cvData, setCVData) {
+export default function EditCV({cvData, setCVData}) {
 
     return (
         <div className="edit-CV">
-            <GeneralInformation />
+            <GeneralInformation 
+              cvData = {cvData}
+              setCVData = {setCVData}
+            />
             <EducationalExperience />
             <PracticalExperience />
             <Skills />
