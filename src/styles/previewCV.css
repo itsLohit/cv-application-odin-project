@@ -1,0 +1,146 @@
+.preview-cv {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-height: 110ch;
+  overflow-y: auto;
+}
+.page {
+  background: #fff;
+  color: #181818;
+  width: 21cm;
+  box-shadow: 0 0.8rem 3rem #bbb;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.6rem;
+  padding: 2.3cm 2.1cm 2.4cm 2.1cm;
+  margin: 2rem 0;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 1.06rem;
+}
+.page h1, .page h2, .page h3 {
+  font-family: inherit;
+  font-weight: bold;
+  line-height: 1.1;
+  margin: 0 0 0.7rem 0;
+}
+.page h1 {
+  text-align: center;
+  font-size: 2.3rem;
+  margin-top: 0.4cm;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+.page .job-title {
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.7rem;
+  color: #333;
+}
+.page h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.11rem;
+  border-bottom: 1.5px solid #181818;
+  color: #212121;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+section {
+  margin-bottom: 1.5rem;
+}
+
+.section-block {
+  margin-bottom: 1rem;
+}
+
+.section-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.section-row .section-inner-div{
+  font-weight: 100;
+  font-size: 1.07rem;
+  color: #141313;
+  text-align: left;
+}
+
+.date-right {
+  min-width: 9.2rem;
+  max-width: 9.2rem;
+  text-align: right;
+  font-size: 1rem;
+  color: #232323;
+  font-weight: 500;
+  white-space: wrap;
+  margin-left: 1rem;
+}
+.section-desc {
+  margin-top: 0.10rem;
+  color: #181818;
+  font-size: 1.01rem;
+  margin-bottom: 0.3rem;
+  max-width: fit-content;
+}
+
+.page ul, .skills-list, .page ol {
+  margin-left: 1.6rem;
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.page li {
+  margin-bottom: 0.14rem;
+}
+.contact-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 2rem;
+  justify-content: center;
+  font-size: 1rem;
+  color: #222;
+  margin-bottom: 0.3rem;
+}
+.contact-items span {
+  display: flex;
+  align-items: center;
+  gap: 0.23rem;
+  font-size: 1rem;
+}
+.contact-items svg {
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.1em;
+  vertical-align: middle;
+  fill: #212121;
+  flex-shrink: 0;
+}
+
+.row2 {
+    margin-bottom: 1rem;
+}
+
+.page a {
+  color: #0056b3;
+  text-decoration: underline;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+@media print {
+  .preview-cv,
+  .page {
+    box-shadow: none !important;
+    border: none !important;
+    background: #fff !important;
+    margin: 0 !important;
+    padding: 0.8cm 0.9cm !important;
+  }
+}

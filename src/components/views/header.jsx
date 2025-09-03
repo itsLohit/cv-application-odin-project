@@ -1,7 +1,9 @@
+import '../../styles/header.css';
+
 export default function Header() {
     return (
         <>
-          <div>Build Your Resume</div>
+          <div className="heading">Build Your Resume</div>
         </>
     )
 }

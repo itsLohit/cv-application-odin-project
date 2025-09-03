@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { EditIcon, AddProjectsIcon, DeleteIcon, SaveIcon, AddSkillsIcon } from "../svg";
+
 
 export function Projects({ cvData, setCVData, editing, updateEditing }) {
   const [editingProject, setEditingProject] = useState(null);
@@ -36,13 +38,13 @@ export function Projects({ cvData, setCVData, editing, updateEditing }) {
     }));
   }
 
-  if (!editing) {
-    return (
-      <div>
-        <h2>{title}</h2>
-        <button onClick={updateEditing}>Edit</button>
-      </div>
-    );
+  if(!editing) {
+      return (
+        <div className="non-edit-view-content">
+          <h2>{title}</h2>
+          <EditIcon onClick={updateEditing}/>
+        </div>
+      )
   }
 
   return (
@@ -100,30 +102,38 @@ export function Projects({ cvData, setCVData, editing, updateEditing }) {
                     }
                   />
                 </div>
-                <button onClick={() => deleteProject(project.id)}>Delete</button>
-                <button onClick={() => setEditingProject(null)}>Save</button>
+                 <div className="inside-edit-btn">
+                      <DeleteIcon onClick={() => deleteProject(project.id)}/>
+                      <SaveIcon onClick={() => setEditingProject(null)}/>
+                  </div>
               </div>
             ) : (
-              <div>
-                <b>{project.name || "No Name"}</b> &mdash;{" "}
-                {project.description || "No Description"}
-                {project.link && (
-                  <>
-                    {" "}
-                    (<a href={project.link} target="_blank" rel="noopener noreferrer">
-                      Link
-                    </a>)
-                  </>
-                )}
-                {" | "}
-                {project.fromDate || "?"} to {project.toDate || "?"}
-                <button onClick={() => handleEditingProject(project.id)}>Edit</button>
-                <button onClick={() => deleteProject(project.id)}>Delete</button>
+              <div className="outside-edit-display">
+                <div>
+                  <b>{project.name || "No Name"}</b> &mdash;{" "}
+                  {project.description || "No Description"}
+                  {project.link && (
+                    <>
+                      {" "}
+                      (<a href={project.link} target="_blank" rel="noopener noreferrer">
+                        Link
+                      </a>)
+                    </>
+                  )}
+                  {" | "}
+                  {project.fromDate || "?"} to {project.toDate || "?"}
+                </div>
+                <div>
+                  <EditIcon onClick={() => handleEditingProject(project.id)}/>
+                  <DeleteIcon onClick={() => deleteProject(project.id)}/>
+                </div>
               </div>
             )}
           </div>
         ))}
-        <button onClick={addProject}>Add Project</button>
+        <div className="add-btn">
+          <AddProjectsIcon onClick={addProject}/>
+        </div>
       </div>
     </div>
   );

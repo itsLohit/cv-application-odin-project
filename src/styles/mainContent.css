@@ -1,0 +1,6 @@
+.main-content {
+    width: 100%;
+    min-height: 100ch;
+    padding: 1rem;
+    display: flex;
+}

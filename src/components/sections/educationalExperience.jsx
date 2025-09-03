@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { EditIcon, AddEducationIcon, DeleteIcon, SaveIcon } from "../svg";
 
 
 export function EducationalExperience ({cvData, setCVData, editing, updateEditing}) {
@@ -42,16 +43,16 @@ export function EducationalExperience ({cvData, setCVData, editing, updateEditin
 
     if(!editing) {
         return (
-            <div>
+            <div className="non-edit-view-content">
                 <h2>{title}</h2>
-                <button onClick={updateEditing}>Edit</button>
+                <EditIcon onClick={updateEditing}/>
             </div>
         )
     }
 
     return (
         <div>
-            <div>{title}</div>
+            <h2>{title}</h2>
             <div>
                 {(cvData.educationInfo.studies || []).map(study => (
                     <div key = {study.id}>
@@ -73,19 +74,23 @@ export function EducationalExperience ({cvData, setCVData, editing, updateEditin
                                     <label>To</label>
                                     <input value={study.toDate} onChange={e => handleStudyChange(study.id, 'toDate', e.target.value)} />
                                 </div>
-                                <button onClick={() => deleteStudy(study.id)}>Delete</button>
-                                <button onClick={() => setEditingStudy(null)}>Save</button>
+                                <div className="inside-edit-btn">
+                                    <DeleteIcon onClick={() => deleteStudy(study.id)}/>
+                                    <SaveIcon onClick={() => setEditingStudy(null)}/>
+                                </div>
                             </div>
                         ): (
-                            <div>
-                              <b>{study.field || 'No Field'}</b> at <b>{study.university || 'No University'}</b> ({study.fromDate || '?'} to {study.toDate || '?'})
-                              <button onClick={() => handleEditingStudy(study.id)}>Edit</button>
-                              <button onClick={() => deleteStudy(study.id)}>Delete</button>
+                            <div className="outside-edit-display">
+                              <div><b>{study.field || 'No Field'}</b> at <b>{study.university || 'No University'}</b> ({study.fromDate || '?'} to {study.toDate || '?'})</div>
+                              <div>
+                                  <EditIcon onClick={() => handleEditingStudy(study.id)}/>
+                                  <DeleteIcon onClick={() => deleteStudy(study.id)}/>
+                              </div>
                             </div>
                            )}
                     </div>
                 ))}
-                {<button onClick={addStudy}>Add Education</button>}
+                <div className="add-btn">{<AddEducationIcon onClick={addStudy}/>}</div>
             </div>
         </div>
     )

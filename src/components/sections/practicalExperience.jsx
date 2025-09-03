@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { EditIcon, AddExperienceIcon, DeleteIcon, SaveIcon } from "../svg";
 
 export function PracticalExperience ({cvData, setCVData, editing, updateEditing}) {
 
@@ -42,16 +42,16 @@ export function PracticalExperience ({cvData, setCVData, editing, updateEditing}
 
     if(!editing) {
         return (
-            <div>
+            <div className="non-edit-view-content">
                 <h2>{title}</h2>
-                <button onClick={updateEditing}>Edit</button>
+                <EditIcon onClick={updateEditing}/>
             </div>
         )
     }
 
     return (
         <div>
-            <div>{title}</div>
+            <h2>{title}</h2>
             <div>
                 {(cvData.experienceInfo.experiences || []).map(experience => (
                     <div key = {experience.id}>
@@ -73,19 +73,23 @@ export function PracticalExperience ({cvData, setCVData, editing, updateEditing}
                                     <label>To</label>
                                     <input value={experience.toDate} onChange={e => handleExperienceChange(experience.id, 'toDate', e.target.value)} />
                                 </div>
-                                <button onClick={() => deleteExperience(experience.id)}>Delete</button>
-                                <button onClick={() => setEditingExperience(null)}>Save</button>
+                                <div className="inside-edit-btn">
+                                    <DeleteIcon onClick={() => deleteExperience(experience.id)}/>
+                                    <SaveIcon onClick={() => setEditingExperience(null)}/>
+                                </div>
                             </div>
                         ): (
-                            <div>
-                              <b>{experience.position || 'No Position'}</b> at <b>{experience.company || 'No Company'}</b> ({experience.fromDate || '?'} to {experience.toDate || '?'})
-                              <button onClick={() => handleEditingExperience(experience.id)}>Edit</button>
-                              <button onClick={() => deleteExperience(experience.id)}>Delete</button>
+                            <div className="outside-edit-display">
+                              <div><b>{experience.position || 'No Position'}</b> at <b>{experience.company || 'No Company'}</b> ({experience.fromDate || '?'} to {experience.toDate || '?'})</div>
+                              <div>
+                                  <EditIcon onClick={() => handleEditingExperience(experience.id)}/>
+                                  <DeleteIcon onClick={() => deleteExperience(experience.id)}/>
+                              </div>
                             </div>
                            )}
                     </div>
                 ))}
-                {<button onClick={addExperience}>Add Experience</button>}
+                <div className="add-btn">{<AddExperienceIcon onClick={addExperience}/>}</div>
             </div>
         </div>
     )

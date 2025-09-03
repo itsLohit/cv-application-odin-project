@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { EditIcon, AddExperienceIcon, DeleteIcon, SaveIcon, AddSkillsIcon } from "../svg";
 
 export function Skills({ cvData, setCVData, editing, updateEditing }) {
   const [editingSkill, setEditingSkill] = useState(null);
@@ -36,18 +37,18 @@ export function Skills({ cvData, setCVData, editing, updateEditing }) {
     }));
   }
 
-  if (!editing) {
-    return (
-      <div>
-        <h2>{title}</h2>
-        <button onClick={updateEditing}>Edit</button>
-      </div>
-    );
-  }
+  if(!editing) {
+        return (
+            <div className="non-edit-view-content">
+                <h2>{title}</h2>
+                <EditIcon onClick={updateEditing}/>
+            </div>
+        )
+    }
 
   return (
     <div>
-      <div>{title}</div>
+      <h2>{title}</h2>
       <div>
         {(cvData.skills || []).map(skill => (
           <div key={skill.id}>
@@ -71,20 +72,28 @@ export function Skills({ cvData, setCVData, editing, updateEditing }) {
                     }
                   />
                 </div>
-                <button onClick={() => deleteSkill(skill.id)}>Delete</button>
-                <button onClick={() => setEditingSkill(null)}>Save</button>
+                <div className="inside-edit-btn">
+                    <DeleteIcon onClick={() => deleteSkill(skill.id)}/>
+                    <SaveIcon onClick={() => setEditingSkill(null)}/>
+                </div>
               </div>
             ) : (
-              <div>
-                <b>{skill.name || "No Skill"}</b>
-                {skill.proficiency && <> — {skill.proficiency}</>}
-                <button onClick={() => handleEditingSkill(skill.id)}>Edit</button>
-                <button onClick={() => deleteSkill(skill.id)}>Delete</button>
+              <div className="outside-edit-display">
+                <div>
+                  <b>{skill.name || "No Skill"}</b>
+                  {skill.proficiency && <> — {skill.proficiency}</>}
+                </div>
+                <div>
+                    <EditIcon onClick={() => handleEditingSkill(skill.id)}/>
+                    <DeleteIcon onClick={() => deleteSkill(skill.id)}/>
+                </div>
               </div>
             )}
           </div>
         ))}
-        <button onClick={addSkill}>Add Skill</button>
+        <div className="add-btn">
+          <AddSkillsIcon onClick={addSkill}/>
+        </div>
       </div>
     </div>
   );

@@ -1,44 +1,49 @@
 // name, job title, address, phone, email, github, linkedin
-
+import { EditIcon, GeneralInfoContact, SaveIcon } from "../svg";
 
 export default function GeneralInformation({cvData, setCVData, editing, updateEditing}) {
 
     const title = 'General Information';
     const sections = [
-      {id: 'fullName', label: 'Full Name', value: cvData.personalInfo?.fullName || 'Lohit'},
-      {id: 'jobTitle', label: 'Job Title', value: cvData.personalInfo?.jobTitle || 'Mechanical Engineer'},
+      {id: 'fullName', label: 'Full Name', value: cvData.generalInfo?.fullName || 'Lohit'},
+      {id: 'jobTitle', label: 'Job Title', value: cvData.generalInfo?.jobTitle || 'Mechanical Engineer'},
     ];
 
     const contacts = [
-      {id: 'address', label: 'Address', value: cvData.personalInfo?.address || '7/56, Pavithiram Mettukadai'},
-      {id: 'phone', label: 'Phone', value: cvData.personalInfo?.phone || '+91 97901 59159'},
-      {id: 'email', label: 'Email', value: cvData.personalInfo?.email || 'lohitworkmail@gmail.com'},
-      {id: 'github', label: 'Github', value: cvData.personalInfo?.github || 'github.com/itsLohit'},
-      {id: 'linkedin', label: 'LinkedIn', value: cvData.personalInfo?.linkedin || 'linkedin.com/lohitt'},
+      {id: 'address', label: 'Address', value: cvData.generalInfo?.address || '7/56, Pavithiram Mettukadai'},
+      {id: 'phone', label: 'Phone', value: cvData.generalInfo?.phone || '+91 97901 59159'},
+      {id: 'email', label: 'Email', value: cvData.generalInfo?.email || 'lohitworkmail@gmail.com'},
+      {id: 'github', label: 'Github', value: cvData.generalInfo?.github || 'github.com/itsLohit'},
+      {id: 'linkedin', label: 'LinkedIn', value: cvData.generalInfo?.linkedin || 'linkedin.com/lohitt'},
     ];
 
-    function handlePersonalInfoChange (id, newValue) {
-      setCVData(prev => ({ ...prev, personalInfo:{ ...prev.personalInfo, [id]: newValue}}));
+    function handleGeneralInfoChange (id, newValue) {
+      setCVData(prev => ({ ...prev, generalInfo:{ ...prev.generalInfo, [id]: newValue}}));
     }
 
     if(!editing) {
       return (
         <div>
-          <div>
+          <div className='general-info-header'>
             <h2>{title}</h2>
-            <button onClick={updateEditing}>Edit</button>
+            <EditIcon onClick={updateEditing}/>
           </div>
-          <div>
-            {sections.map(section => (
-            <div key = {section.id}>
-              <p>{section.value}</p>
+          <div className='general-info-content'>
+            <div>
+              {sections.map(section => (
+              <div key = {section.id}>
+                <b>{section.value}</b>
+              </div>
+                        ))}
             </div>
-          ))}
-            {contacts.map(contact => (
-            <div key = {contact.id}>
-              <p>{contact.value}</p>
+            <div>
+              {contacts.map(contact => (
+              <div key = {contact.id} className="edit-flex">
+                <GeneralInfoContact key={contact.id} type={contact.id}/>
+                <p>{contact.value}</p>
+              </div>
+                        ))}
             </div>
-          ))}
           </div>
         </div>
       )
@@ -55,17 +60,19 @@ export default function GeneralInformation({cvData, setCVData, editing, updateEd
           {sections.map(section => (
             <div key = {section.id}>
               <label>{section.label}</label>
-              <input value={section.value} onChange={e => handlePersonalInfoChange(section.id, e.target.value)} />
+              <input value={section.value} onChange={e => handleGeneralInfoChange(section.id, e.target.value)} />
             </div>
           ))}
           {contacts.map(contact => (
             <div key = {contact.id}>
               <label>{contact.label}</label>
-              <input value={contact.value} onChange={e => handlePersonalInfoChange(contact.id, e.target.value)} />
+              <input value={contact.value} onChange={e => handleGeneralInfoChange(contact.id, e.target.value)} />
             </div>
           ))}
         </div>
-        <button onClick={updateEditing}>Save</button>
+        <div className="save-btn">
+          <SaveIcon onClick={updateEditing}/>
+        </div>
       </div>
     )
 }
