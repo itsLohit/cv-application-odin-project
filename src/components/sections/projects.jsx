@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EditIcon, AddProjectsIcon, DeleteIcon, SaveIcon, AddSkillsIcon } from "../svg";
+import { EditIcon, AddProjectsIcon, DeleteIcon, SaveIcon, AddSkillsIcon } from "../icons/svg";
 
 
 export function Projects({ cvData, setCVData, editing, updateEditing }) {
@@ -58,8 +58,10 @@ export function Projects({ cvData, setCVData, editing, updateEditing }) {
             {editingProject === project.id ? (
               <div>
                 <div>
-                  <label>Name</label>
+                  <label htmlFor={`name-${project.id}`}>Name</label>
                   <input
+                    id={`name-${project.id}`}
+                    type="text"
                     value={project.name}
                     onChange={e =>
                       handleProjectChange(project.id, "name", e.target.value)
@@ -67,8 +69,10 @@ export function Projects({ cvData, setCVData, editing, updateEditing }) {
                   />
                 </div>
                 <div>
-                  <label>Description</label>
+                  <label htmlFor={`description-${project.id}`}>Description</label>
                   <input
+                    id={`description-${project.id}`}
+                    type="text"
                     value={project.description}
                     onChange={e =>
                       handleProjectChange(project.id, "description", e.target.value)
@@ -76,8 +80,12 @@ export function Projects({ cvData, setCVData, editing, updateEditing }) {
                   />
                 </div>
                 <div>
-                  <label>Link</label>
+                  <label htmlFor={`link-${project.id}`}>Link</label>
                   <input
+                    id={`link-${project.id}`}
+                    type="url"
+                    placeholder="https://github.com/..."
+                    autoComplete="url"
                     value={project.link}
                     onChange={e =>
                       handleProjectChange(project.id, "link", e.target.value)
@@ -85,8 +93,12 @@ export function Projects({ cvData, setCVData, editing, updateEditing }) {
                   />
                 </div>
                 <div>
-                  <label>From</label>
+                  <label htmlFor={`fromDate-${project.id}`}>From</label>
                   <input
+                    id={`fromDate-${project.id}`}
+                    type="date"
+                    placeholder="YYYY-MM-DD"
+                    autoComplete="bday-month"
                     value={project.fromDate}
                     onChange={e =>
                       handleProjectChange(project.id, "fromDate", e.target.value)
@@ -94,8 +106,12 @@ export function Projects({ cvData, setCVData, editing, updateEditing }) {
                   />
                 </div>
                 <div>
-                  <label>To</label>
+                  <label htmlFor={`toDate-${project.id}`}>To</label>
                   <input
+                    id={`toDate-${project.id}`}
+                    type="date"
+                    placeholder="YYYY-MM-DD"
+                    autoComplete="bday-month"
                     value={project.toDate}
                     onChange={e =>
                       handleProjectChange(project.id, "toDate", e.target.value)
@@ -103,8 +119,8 @@ export function Projects({ cvData, setCVData, editing, updateEditing }) {
                   />
                 </div>
                  <div className="inside-edit-btn">
-                      <DeleteIcon onClick={() => deleteProject(project.id)}/>
-                      <SaveIcon onClick={() => setEditingProject(null)}/>
+                      <DeleteIcon onClick={() => deleteProject(project.id)} tabIndex={0} aria-label="Delete project"/>
+                      <SaveIcon onClick={() => setEditingProject(null)} tabIndex={0} aria-label="Save project"/>
                   </div>
               </div>
             ) : (
@@ -123,16 +139,16 @@ export function Projects({ cvData, setCVData, editing, updateEditing }) {
                   {" | "}
                   {project.fromDate || "?"} to {project.toDate || "?"}
                 </div>
-                <div>
-                  <EditIcon onClick={() => handleEditingProject(project.id)}/>
-                  <DeleteIcon onClick={() => deleteProject(project.id)}/>
+                <div className="outside-button">
+                  <EditIcon onClick={() => handleEditingProject(project.id)} tabIndex={0} aria-label="Edit project"/>
+                  <DeleteIcon onClick={() => deleteProject(project.id)} tabIndex={0} aria-label="Delete project"/>
                 </div>
               </div>
             )}
           </div>
         ))}
         <div className="add-btn">
-          <AddProjectsIcon onClick={addProject}/>
+          <AddProjectsIcon onClick={addProject} tabIndex={0} aria-label="Add project"/>
         </div>
       </div>
     </div>

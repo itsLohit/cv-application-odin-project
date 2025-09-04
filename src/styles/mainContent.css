@@ -1,6 +1,63 @@
 .main-content {
     width: 100%;
     min-height: 100ch;
+    max-height: 100ch;
     padding: 1rem;
     display: flex;
+    color: var(--dark-gray);
+    background: var(--background-light);
+}
+
+.cv-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+}
+
+.cv-actions button {
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.4rem;
+  border: 1px solid #eee;
+  background: #f6f7fa;
+  color: #212121;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 5px 20px var(--neutral-gray);
+  background: var(--primary-blue); color: var(--white);
+}
+
+.cv-actions button:hover {
+  background: var(--secondary-blue);
+  border: 1px solid var(--secondary-blue);
+}
+
+
+.page a,
+.edit-cv a {
+  color: var(--accent-link);
+}
+
+@media (max-width: 900px) {
+  .main-content,
+  .preview-cv {
+    flex-direction: column !important;
+    align-items: center !important;
+    min-width: 0;
+    width: 100vw !important;
+    padding: 0 !important;
+  }
+
+  .edit-cv,
+  .preview-cv {
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    width: 100vw !important;
+    border-radius: 0 !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    box-shadow: none !important;
+    margin: 0 0 1.5rem 0 !important;
+  }
 }

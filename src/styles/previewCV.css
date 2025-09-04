@@ -1,4 +1,5 @@
 .preview-cv {
+  position: relative;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -6,19 +7,41 @@
   max-height: 110ch;
   overflow-y: auto;
 }
+
+.download-btn {
+  position: absolute;
+  z-index: 10;
+  padding: 0.5rem 1.2rem;
+  background: var(--primary-blue); 
+  color: var(--white);
+  border-radius: 0.5rem;
+  border: none;
+  font-weight: 600;
+  font-size: 1.08rem;
+  box-shadow: 0 5px 20px var(--neutral-gray);
+  cursor: pointer;
+}
+
+.download-btn:hover {
+  background: var(--secondary-blue);
+}
+
 .page {
-  background: #fff;
-  color: #181818;
-  width: 21cm;
-  box-shadow: 0 0.8rem 3rem #bbb;
+ background: var(--white); 
+ color: var(--dark-gray);
+  max-width: 21cm;
+  min-width: 21cm;  
+  min-height: 29.7cm;
+  box-shadow: 0 5px 20px var(--neutral-gray);
   border: 1px solid #e0e0e0;
   border-radius: 0.6rem;
   padding: 2.3cm 2.1cm 2.4cm 2.1cm;
-  margin: 2rem 0;
+  margin: 1rem 0;
   font-family: 'Georgia', 'Times New Roman', serif;
   font-size: 1.06rem;
 }
 .page h1, .page h2, .page h3 {
+  color: var(--primary-blue);
   font-family: inherit;
   font-weight: bold;
   line-height: 1.1;
@@ -65,6 +88,14 @@ section {
   margin-bottom: 0.5rem;
 }
 
+.section-row > div:first-child {
+  min-width: 0;
+  max-width: 60vw;
+  white-space: normal;         
+  overflow: visible;           
+  text-overflow: clip;         
+}
+
 .section-row .section-inner-div{
   font-weight: 100;
   font-size: 1.07rem;
@@ -73,13 +104,16 @@ section {
 }
 
 .date-right {
-  min-width: 9.2rem;
-  max-width: 9.2rem;
+  min-width: 0;
+  max-width: 40vw;
   text-align: right;
   font-size: 1rem;
   color: #232323;
   font-weight: 500;
-  white-space: wrap;
+  white-space: normal;       
+  word-break: normal;        
+  overflow-wrap: normal;     
+  hyphens: manual;         
   margin-left: 1rem;
 }
 .section-desc {
@@ -128,7 +162,7 @@ section {
 }
 
 .page a {
-  color: #0056b3;
+  color: var(--primary-blue);
   text-decoration: underline;
   font-weight: 500;
   word-break: break-all;
@@ -142,5 +176,46 @@ section {
     background: #fff !important;
     margin: 0 !important;
     padding: 0.8cm 0.9cm !important;
+  }
+
+   body {
+    visibility: hidden;
+  }
+
+  #section-to-print {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .page {
+    min-width: 0 !important;
+    width: 100vw !important;
+    min-height: 0 !important;
+    padding: 1.1rem 0.4rem !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    font-size: 0.98rem !important;
+    overflow-y: auto;
+  }
+  .page h1 { font-size: 1.3rem !important; }
+  .page h2 { font-size: 1.08rem !important; }
+  .section-row, .section-block {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.3rem !important;
+  }
+  .date-right {
+    text-align: left !important;
+    margin-left: 0 !important;
+    margin-top: 0.2rem;
+    max-width: 95vw !important;
+    word-break: break-word !important;
+    font-size: 0.98rem !important;
   }
 }

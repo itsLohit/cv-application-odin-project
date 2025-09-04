@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EditIcon, AddExperienceIcon, DeleteIcon, SaveIcon, AddSkillsIcon } from "../svg";
+import { EditIcon, AddExperienceIcon, DeleteIcon, SaveIcon, AddSkillsIcon } from "../icons/svg";
 
 export function Skills({ cvData, setCVData, editing, updateEditing }) {
   const [editingSkill, setEditingSkill] = useState(null);
@@ -55,26 +55,32 @@ export function Skills({ cvData, setCVData, editing, updateEditing }) {
             {editingSkill === skill.id ? (
               <div>
                 <div>
-                  <label>Skill Name</label>
+                  <label htmlFor={`skill-name-${skill.id}`}>Skill Name</label>
                   <input
+                    id={`skill-name-${skill.id}`}
+                    type="text"
                     value={skill.name}
                     onChange={e =>
                       handleSkillChange(skill.id, "name", e.target.value)
                     }
+                    placeholder="e.g. JavaScript"
                   />
                 </div>
                 <div>
-                  <label>Proficiency</label>
+                  <label htmlFor={`skill-prof-${skill.id}`}>Proficiency</label>
                   <input
+                    id={`skill-prof-${skill.id}`}
+                    type="text"
                     value={skill.proficiency}
                     onChange={e =>
                       handleSkillChange(skill.id, "proficiency", e.target.value)
                     }
+                    placeholder="e.g. Advanced"
                   />
                 </div>
                 <div className="inside-edit-btn">
-                    <DeleteIcon onClick={() => deleteSkill(skill.id)}/>
-                    <SaveIcon onClick={() => setEditingSkill(null)}/>
+                    <DeleteIcon onClick={() => deleteSkill(skill.id)} tabIndex={0} aria-label="Delete skill"/>
+                    <SaveIcon onClick={() => setEditingSkill(null)} tabIndex={0} aria-label="Save skill"/>
                 </div>
               </div>
             ) : (
@@ -83,16 +89,16 @@ export function Skills({ cvData, setCVData, editing, updateEditing }) {
                   <b>{skill.name || "No Skill"}</b>
                   {skill.proficiency && <> — {skill.proficiency}</>}
                 </div>
-                <div>
-                    <EditIcon onClick={() => handleEditingSkill(skill.id)}/>
-                    <DeleteIcon onClick={() => deleteSkill(skill.id)}/>
+                <div className="outside-button">
+                    <EditIcon onClick={() => handleEditingSkill(skill.id)} tabIndex={0} aria-label="Edit skill"/>
+                    <DeleteIcon onClick={() => deleteSkill(skill.id)} tabIndex={0} aria-label="Delete skill"/>
                 </div>
               </div>
             )}
           </div>
         ))}
         <div className="add-btn">
-          <AddSkillsIcon onClick={addSkill}/>
+          <AddSkillsIcon onClick={addSkill} tabIndex={0} aria-label="Add skill"/>
         </div>
       </div>
     </div>

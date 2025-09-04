@@ -1,4 +1,6 @@
 .heading {
     text-align: center;
     font-size: 2rem;
+    background-color: var(--primary-blue);
+    color: white;
 }

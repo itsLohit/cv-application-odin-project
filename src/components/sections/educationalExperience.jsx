@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EditIcon, AddEducationIcon, DeleteIcon, SaveIcon } from "../svg";
+import { EditIcon, AddEducationIcon, DeleteIcon, SaveIcon } from "../icons/svg";
 
 
 export function EducationalExperience ({cvData, setCVData, editing, updateEditing}) {
@@ -59,38 +59,38 @@ export function EducationalExperience ({cvData, setCVData, editing, updateEditin
                         {editingStudy === study.id ? (
                             <div>
                                 <div>
-                                  <label>Field of Study</label>
-                                  <input value={study.field} onChange={e => handleStudyChange(study.id, 'field', e.target.value)} />
+                                  <label htmlFor={`field-${study.id}`}>Field of Study</label>
+                                  <input id={`field-${study.id}`} type="text" value={study.field} onChange={e => handleStudyChange(study.id, 'field', e.target.value)} />
                                 </div>
                                 <div>
-                                  <label>University</label>
-                                  <input value={study.university} onChange={e => handleStudyChange(study.id, 'university', e.target.value)} />
+                                  <label htmlFor={`university-${study.id}`}>University</label>
+                                  <input id={`university-${study.id}`} type="text" value={study.university} onChange={e => handleStudyChange(study.id, 'university', e.target.value)} />
                                 </div>
                                 <div>
-                                    <label>From</label>
-                                    <input value={study.fromDate} onChange={e => handleStudyChange(study.id, 'fromDate', e.target.value)} />
+                                    <label htmlFor={`fromDate-${study.id}`}>From</label>
+                                    <input id={`fromDate-${study.id}`} type="date" autoComplete="bday-month" placeholder="YYYY or YYYY-MM" value={study.fromDate} onChange={e => handleStudyChange(study.id, 'fromDate', e.target.value)} />
                                 </div>
                                 <div>
-                                    <label>To</label>
-                                    <input value={study.toDate} onChange={e => handleStudyChange(study.id, 'toDate', e.target.value)} />
+                                    <label htmlFor={`toDate-${study.id}`}>To</label>
+                                    <input id={`toDate-${study.id}`} type="date" autoComplete="bday-month" placeholder="YYYY or YYYY-MM" value={study.toDate} onChange={e => handleStudyChange(study.id, 'toDate', e.target.value)} />
                                 </div>
                                 <div className="inside-edit-btn">
                                     <DeleteIcon onClick={() => deleteStudy(study.id)}/>
-                                    <SaveIcon onClick={() => setEditingStudy(null)}/>
+                                    <SaveIcon onClick={() => setEditingStudy(null)} tabIndex={0} aria-label="Save study"/>
                                 </div>
                             </div>
                         ): (
                             <div className="outside-edit-display">
                               <div><b>{study.field || 'No Field'}</b> at <b>{study.university || 'No University'}</b> ({study.fromDate || '?'} to {study.toDate || '?'})</div>
-                              <div>
-                                  <EditIcon onClick={() => handleEditingStudy(study.id)}/>
-                                  <DeleteIcon onClick={() => deleteStudy(study.id)}/>
+                              <div className="outside-button">
+                                  <EditIcon onClick={() => handleEditingStudy(study.id)} tabIndex={0} aria-label="Edit study"/>
+                                  <DeleteIcon onClick={() => deleteStudy(study.id)} tabIndex={0} aria-label="Delete study"/>
                               </div>
                             </div>
                            )}
                     </div>
                 ))}
-                <div className="add-btn">{<AddEducationIcon onClick={addStudy}/>}</div>
+                <div className="add-btn">{<AddEducationIcon onClick={addStudy} tabIndex={0} aria-label="Add education"/>}</div>
             </div>
         </div>
     )

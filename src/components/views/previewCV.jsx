@@ -1,7 +1,23 @@
 import '../../styles/previewCV.css';
-import { GeneralInfoContact } from "../svg";
+import { GeneralInfoContact } from "../icons/svg";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+
+function nonBreakingDate(str) {
+  // Replace all ASCII hyphens with non-breaking hyphen
+  if (!str) return "";
+  return str.replace(/-/g, "\u2011");
+}
 
 export default function PreviewCV({ cvData }) {
+
+
+  const contentRef = useRef();
+  const handlePrint = useReactToPrint({
+    documentTitle: "CV",
+    contentRef: contentRef,
+  });
+
 
   const contacts = [
     { type: "address", value: cvData.generalInfo?.address },
@@ -12,8 +28,14 @@ export default function PreviewCV({ cvData }) {
   ];
   return (
     <div className="preview-cv">
-      <div className="page">
-
+      <button
+        type="button"
+        onClick={handlePrint}
+        className="download-btn"
+      >
+        Print PDF
+      </button>
+      <div className="page" id="section-to-print" ref={contentRef}>
         <h1>{cvData.generalInfo?.fullName || "Full Name"}</h1>
         <div className="job-title">{cvData.generalInfo?.jobTitle || "Job Title"}</div>
 
@@ -30,11 +52,16 @@ export default function PreviewCV({ cvData }) {
               <div className="section-block" key={study.id}>
                 <div className="section-row">
                   <div>
-                    <b>{study.field || "Field of Study"}</b>
-                    {study.university && <> - {study.university}</>}
+                    <div>
+                      <b>{study.field || "Field of Study"}</b>
+                    </div>
+                    {study.university && (
+                      <div className="university-text">{study.university}</div>
+                    )}
                   </div>
                   <div className="date-right">
-                    {(study.fromDate || "From") + (study.toDate ? ` to ${study.toDate}` : "")}
+                    <span>{nonBreakingDate(study.fromDate) || "From"}</span>
+                    {study.toDate && <> <span>to {nonBreakingDate(study.toDate)}</span></>}
                   </div>
                 </div>
               </div>
@@ -64,8 +91,10 @@ export default function PreviewCV({ cvData }) {
                     {exp.company && <><div className='section-inner-div'>{exp.company}</div></>}
                   </div>
                   <div className="date-right">
-                    {(exp.fromDate || "From") + (exp.toDate ? ` to ${exp.toDate}` : "")}
+                    <span>{nonBreakingDate(exp.fromDate) || "From"}</span>
+                    {exp.toDate && <> <span>to {nonBreakingDate(exp.toDate)}</span></>}
                   </div>
+
                 </div>
               </div>
             ))}
@@ -85,7 +114,8 @@ export default function PreviewCV({ cvData }) {
                     )}
                   </div>
                   <div className="date-right">
-                    {(project.fromDate || "From") + (project.toDate ? ` to ${project.toDate}` : "")}
+                    <span>{nonBreakingDate(project.fromDate) || "From"}</span>
+                    {project.toDate && <> <span>to {nonBreakingDate(project.toDate)}</span></>}
                   </div>
                 </div>
                 {project.description && (

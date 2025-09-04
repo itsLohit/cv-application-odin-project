@@ -1,3 +1,18 @@
+:root {
+  --primary-blue: #1E3A8A;
+  --secondary-blue: #3B82F6;
+  --light-blue: #DBEAFE;
+  --neutral-gray: #6B7280;
+  --dark-gray: #1F2937;
+  --white: #FFFFFF;
+  --background-light: #F9FAFB;
+  --background-panel: #F3F4F6;
+  --accent-link: #0891B2;
+  --success-green: #10B981;
+  --warning-yellow: #FACC15;
+  --error-red: #EF4444;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -8,7 +23,9 @@
 
 html, body {
   height: 100%;
-  background-color: bisque;
+  background-color: var(--background-light);
+  overflow-x: hidden;
+  color: var(--dark-gray);
 }
 
 body {

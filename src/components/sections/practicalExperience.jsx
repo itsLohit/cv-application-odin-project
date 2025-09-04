@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { EditIcon, AddExperienceIcon, DeleteIcon, SaveIcon } from "../svg";
+import { EditIcon, AddExperienceIcon, DeleteIcon, SaveIcon } from "../icons/svg";
 
 export function PracticalExperience ({cvData, setCVData, editing, updateEditing}) {
 
@@ -58,38 +58,38 @@ export function PracticalExperience ({cvData, setCVData, editing, updateEditing}
                         {editingExperience === experience.id ? (
                             <div>
                                 <div>
-                                  <label>Position</label>
-                                  <input value={experience.position} onChange={e => handleExperienceChange(experience.id, 'position', e.target.value)} />
+                                  <label htmlFor={`position-${experience.id}`}>Position</label>
+                                  <input id={`position-${experience.id}`} type="text" value={experience.position} onChange={e => handleExperienceChange(experience.id, 'position', e.target.value)} />
                                 </div>
                                 <div>
-                                  <label>Company</label>
-                                  <input value={experience.company} onChange={e => handleExperienceChange(experience.id, 'company', e.target.value)} />
+                                  <label htmlFor={`company-${experience.id}`}>Company</label>
+                                  <input id={`company-${experience.id}`} type="text" value={experience.company} onChange={e => handleExperienceChange(experience.id, 'company', e.target.value)} />
                                 </div>
                                 <div>
-                                    <label>From</label>
-                                    <input value={experience.fromDate} onChange={e => handleExperienceChange(experience.id, 'fromDate', e.target.value)} />
+                                    <label htmlFor={`fromDate-${experience.id}`}>From</label>
+                                    <input id={`fromDate-${experience.id}`} type="date" autoComplete="bday-month" placeholder="YYYY-MM-DD" value={experience.fromDate} onChange={e => handleExperienceChange(experience.id, 'fromDate', e.target.value)} />
                                 </div>
                                 <div>
-                                    <label>To</label>
-                                    <input value={experience.toDate} onChange={e => handleExperienceChange(experience.id, 'toDate', e.target.value)} />
+                                    <label htmlFor={`toDate-${experience.id}`}>To</label>
+                                    <input id={`toDate-${experience.id}`} type="date" autoComplete="bday-month" placeholder="YYYY-MM-DD" value={experience.toDate} onChange={e => handleExperienceChange(experience.id, 'toDate', e.target.value)} />
                                 </div>
                                 <div className="inside-edit-btn">
-                                    <DeleteIcon onClick={() => deleteExperience(experience.id)}/>
-                                    <SaveIcon onClick={() => setEditingExperience(null)}/>
+                                    <DeleteIcon onClick={() => deleteExperience(experience.id)} tabIndex={0} aria-label="Delete experience"/>
+                                    <SaveIcon onClick={() => setEditingExperience(null)} tabIndex={0} aria-label="Save experience"/>
                                 </div>
                             </div>
                         ): (
                             <div className="outside-edit-display">
                               <div><b>{experience.position || 'No Position'}</b> at <b>{experience.company || 'No Company'}</b> ({experience.fromDate || '?'} to {experience.toDate || '?'})</div>
-                              <div>
-                                  <EditIcon onClick={() => handleEditingExperience(experience.id)}/>
-                                  <DeleteIcon onClick={() => deleteExperience(experience.id)}/>
+                              <div className="outside-button">
+                                  <EditIcon onClick={() => handleEditingExperience(experience.id)} tabIndex={0} aria-label="Edit experience"/>
+                                  <DeleteIcon onClick={() => deleteExperience(experience.id)} tabIndex={0} aria-label="Delete experience"/>
                               </div>
                             </div>
                            )}
                     </div>
                 ))}
-                <div className="add-btn">{<AddExperienceIcon onClick={addExperience}/>}</div>
+                <div className="add-btn">{<AddExperienceIcon onClick={addExperience} tabIndex={0} aria-label="Add experience"/>}</div>
             </div>
         </div>
     )
